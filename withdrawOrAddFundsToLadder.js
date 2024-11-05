@@ -13,7 +13,7 @@ const withdrawOrAddFundsToLadder = async (req, res) => {
 
         
         const ladder = await Ladder.findOne({ where: { lad_id, lad_user_id } });
-
+        console.log("ladder details here ----", ladder);
        
         if (!ladder) {
             return res.status(404).json({ message: "Ladder not found for the specified user." });
