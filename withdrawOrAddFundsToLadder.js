@@ -1,4 +1,4 @@
-const Ladder = require('../model/addSubModel'); 
+const Ladder = require('../model/ladderModel'); 
 const dd_orders = require('../model/orderModel'); 
 
 const withdrawOrAddFundsToLadder = async (req, res) => {
@@ -35,21 +35,21 @@ const withdrawOrAddFundsToLadder = async (req, res) => {
        
         if (new_stocks_to_buy > 0) {
             let buyOrderData = {
-                order_type: "BUY",
-                order_status: "OPEN",
-                order_user_id: lad_user_id,
-                order_position_id: ladder.lad_position_id, 
-                order_automated: true,
-                order_open_price: currentPrice - ladder.step_size,
-                order_trading_mode: ladder.lad_trading_mode,
-                order_units: new_order_size, 
-                order_closed_units: 0,
-                order_cash_gain: 0,
-                order_realized_profit: 0,
-                order_exchange: ladder.lad_exchange, 
-                order_ticker_id: ladder.lad_ticker_id, 
-                order_stock_name: ladder.lad_ticker, 
-                order_follow_up: "'Buy&Sell'",
+            order_type: "BUY",
+            order_status: "OPEN",
+            order_user_id: lad_user_id,
+            order_position_id: ladder.lad_position_id,
+            order_automated: true,
+            order_open_price: currentPrice - ladder.step_size,
+            order_trading_mode: ladder.lad_trading_mode,
+            order_units: new_order_size,
+            order_closed_units: 0,
+            order_cash_gain: 0,
+            order_realized_profit: 0,
+            order_exchange: ladder.lad_exchange, 
+            order_ticker_id: ladder.lad_ticker_id, 
+            order_stock_name: ladder.lad_ticker, 
+            order_follow_up: "'Buy&Sell'",
             };
             await dd_orders.create(buyOrderData);
         } else if (new_stocks_to_buy < 0) {
