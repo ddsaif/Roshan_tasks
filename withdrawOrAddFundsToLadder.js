@@ -1,6 +1,3 @@
-const Ladder = require('../model/ladderModel'); 
-const dd_orders = require('../model/orderModel'); 
-
 const withdrawOrAddFundsToLadder = async (req, res) => {
     try {
         const lad_user_id = req.params.id; 
@@ -13,7 +10,7 @@ const withdrawOrAddFundsToLadder = async (req, res) => {
 
         
         const ladder = await Ladder.findOne({ where: { lad_id, lad_user_id } });
-        console.log("ladder details here ----", ladder);
+       
        
         if (!ladder) {
             return res.status(404).json({ message: "Ladder not found for the specified user." });
@@ -32,7 +29,6 @@ const withdrawOrAddFundsToLadder = async (req, res) => {
             return res.status(400).json({ message: "Ladder position ID cannot be null." });
         }
 
-       
         if (new_stocks_to_buy > 0) {
             let buyOrderData = {
             order_type: "BUY",
@@ -86,3 +82,4 @@ const withdrawOrAddFundsToLadder = async (req, res) => {
 module.exports = {
     withdrawOrAddFundsToLadder,
 };
+ 
